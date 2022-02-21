@@ -3,17 +3,14 @@ import pdb
 
 import tensorflow as tf
 import tensorflow_hub as hub
-import IPython.display as display
+import numpy as np
+import PIL.Image
 
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 mpl.rcParams['figure.figsize'] = (12, 12)
 mpl.rcParams['axes.grid'] = False
 
-import numpy as np
-import PIL.Image
-import time
-import functools
 
 # Load compressed models from tensorflow_hub
 os.environ['TFHUB_MODEL_LOAD_FORMAT'] = 'COMPRESSED'
@@ -72,5 +69,5 @@ imshow(style_image, 'Style Image')
 
 hub_model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
 stylized_image = hub_model(tf.constant(content_image), tf.constant(style_image))[0]
-iii = tensor_to_image(stylized_image)
-pdb.set_trace()
+output = tensor_to_image(stylized_image)
+output.show()
